@@ -1,9 +1,9 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import graphReducer from './reducers/graphReducer';
+import graph from './reducers/graphReducer';
 
 export default function configureStore() {
     const reducers = combineReducers({
-        graphReducer
+        graph
     });
     const store = createStore(
         reducers, 
