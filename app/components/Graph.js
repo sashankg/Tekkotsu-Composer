@@ -1,9 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Joint from 'jointjs';
-import { selectElement, dragElement } from '../actions/graphActions.js';
+import { selectElement, dragElement } from '../actions/graphActions';
 
 class Graph extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            dragging: false
+        }
+    }
+
     componentDidMount() {
         this.graph = new Joint.dia.Graph;
         if(this.props.elements) {
@@ -21,9 +28,22 @@ class Graph extends React.Component {
         window.onresize = function() {
             paper.setDimensions(node.offsetWidth, node.offsetHeight);
         }
+        paper.on('cell:pointerup', this.handlePointerUp.bind(this));
+        paper.on('cell:pointermove', this.handlePointerMove.bind(this));
+    }
 
-        paper.on('cell:pointerclick', this.props.selectElement);
-        paper.on('cell:pointerup', this.props.dragElement)
+    handlePointerMove() {
+        this.setState({ dragging: true });
+    }
+
+    handlePointerUp(cellView) {
+        if(this.state.dragging) {
+            this.props.dragElement(cellView);
+            this.setState({ dragging: false });
+        } 
+        else {
+            this.props.selectElement(cellView); 
+        }
     }
 
     componentWillUnmount() {
@@ -45,20 +65,17 @@ class Graph extends React.Component {
 
 function mapStateToProps(state) {
     var graph = state.graph;
-    return { elements: graph.elements }
+    return { elements: graph.array.map(id => graph.entities[id]) }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         selectElement: function(cellView) {
-            dispatch(Actions.selectElement(cellView.options.model.id));
+            dispatch(selectElement(cellView.options.model.id));
         },
-        addElement: function() {
-            dispatch(Actions.addElement());
-        },
-        dragElement: function(cellView, evt) {
+        dragElement: function(cellView) {
             var frame = cellView.getBBox();
-            dispatch(Actions.dragElement(cellView.options.model.id, frame.x, frame.y));
+            dispatch(dragElement(cellView.options.model.id, frame.x, frame.y));
         }
     }
 }
