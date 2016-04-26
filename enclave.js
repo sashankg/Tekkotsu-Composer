@@ -1,5 +1,6 @@
 exports.entry = "index.js"
+exports.index = "index.html"
 exports.output = "dist"
 exports.port = 8080
-exports.index = "index.html"
+exports.autoInstall = false
 exports.live = true

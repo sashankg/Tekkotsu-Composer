@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Joint from 'jointjs';
-import { selectElement, dragElement } from '../actions/graphActions';
+import { addElement, selectElement, dragElement } from '../actions/graphActions';
+import { DropTarget } from 'react-dnd';
 
 class Graph extends React.Component {
     constructor(props) {
@@ -38,11 +39,12 @@ class Graph extends React.Component {
 
     handlePointerUp(cellView) {
         if(this.state.dragging) {
-            this.props.dragElement(cellView);
+            var frame = cellView.getBBox();
+            this.props.dragElement(cellView.options.model.id, frame.x, frame.y);
             this.setState({ dragging: false });
         } 
         else {
-            this.props.selectElement(cellView); 
+            this.props.selectElement(cellView.options.model.id); 
         }
     }
 
@@ -59,7 +61,7 @@ class Graph extends React.Component {
     }
 
     render() {
-        return <div id="graph" />
+        return this.props.connectDropTarget(<div id="graph" />);
     }
 }
 
@@ -68,16 +70,28 @@ function mapStateToProps(state) {
     return { elements: graph.array.map(id => graph.entities[id]) }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        selectElement: function(cellView) {
-            dispatch(selectElement(cellView.options.model.id));
-        },
-        dragElement: function(cellView) {
-            var frame = cellView.getBBox();
-            dispatch(dragElement(cellView.options.model.id, frame.x, frame.y));
-        }
-    }
+const mapDispatchToProps = {
+    selectElement,
+    dragElement,
+    addElement,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Graph);
+const spec = {
+  drop(props, monitor) {
+      const boundingRect = document.getElementById('graph').getBoundingClientRect();
+      console.log(boundingRect);
+      const clientOffset = monitor.getClientOffset();
+      const x = clientOffset.x - boundingRect.left;
+      const y = clientOffset.y - boundingRect.top;
+      props.addElement({ x, y });
+  }
+};
+
+function collect(connect, monitor) {
+  return {
+      connectDropTarget: connect.dropTarget(),
+      isOver: monitor.isOver()
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DropTarget('node_class', spec, collect)(Graph));

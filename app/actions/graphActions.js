@@ -1,5 +1,5 @@
-export function addElement() {
-    return { type: 'ADD_ELEMENT' };
+export function addElement(position) {
+    return { type: 'ADD_ELEMENT', position };
 }
 
 export function selectElement(id) {

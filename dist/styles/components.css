@@ -1,3 +1,16 @@
 html, body, #root, .app, #graph {
     height: 100%;
 }
+
+.app {
+    display: flex;
+    flex-direction: row;
+}
+
+#graph {
+    flex-grow: 1;
+}
+
+.node-list {
+    order: 2;
+}
