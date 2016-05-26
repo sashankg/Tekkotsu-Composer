@@ -26,9 +26,7 @@ class Graph extends React.Component {
             width: node.offsetWidth,
             height: node.offsetHeight,
         });
-        window.onresize = function() {
-            paper.setDimensions(node.offsetWidth, node.offsetHeight);
-        }
+        paper.setOrigin(100, 100);
         paper.on('cell:pointerup', this.handlePointerUp.bind(this));
         paper.on('cell:pointermove', this.handlePointerMove.bind(this));
     }
