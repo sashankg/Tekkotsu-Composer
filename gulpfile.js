@@ -33,7 +33,7 @@ gulp.task('deploy', function (){
 });
 
 gulp.task('watch', function () {
-    gulp.watch(['./app/**/*.js'], ['scripts']);
+    gulp.watch(['./app/**/*.js', './app/*.js', './index.js'], ['scripts']);
 });
 
 // When running 'gulp' on the terminal this task will fire.

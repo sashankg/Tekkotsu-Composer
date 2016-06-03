@@ -9,7 +9,6 @@ import { default as TouchBackend } from 'react-dnd-touch-backend';
 
 class App extends React.Component {
     render() {
-        console.log(this);
         return (
             <div className="app">
                 <NodeClassList />

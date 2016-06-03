@@ -10,7 +10,6 @@ html, body, #root {
 
 #graph {
     flex-grow: 1;
-    background-color: blue;
     overflow: hidden;
     height: 100%;
 }
