@@ -6,7 +6,8 @@ export default function graphReducer(state, action) {
             const element = new Joint.shapes.basic.Rect({
                 position: action.position ? action.position : { x: 100, y: 100 },
                 size: { width: 100, height: 100 },
-                attrs: { rect: { fill: 'blue' }, text: { text: 'Node', fill: 'white' } }
+                attrs: { rect: { fill: 'blue' }, text: { text: 'Node', fill: 'white' } },
+                className: action.className,
             }).toJSON();
             const array = state.array.concat(element.id);
             return {
@@ -25,12 +26,13 @@ export default function graphReducer(state, action) {
         case 'ADD_LINK': {
             const linkObject = new Joint.dia.Link({
                 source: { id: action.source },
-                target: { id: action.target }
+                target: { id: action.target },
+                labels: [
+                    { position: 0.5, attrs: { text: { text: 'label' } } }
+                ]
             })
             linkObject.attr({
-                '.connection': { stroke: 'blue' },
-                '.marker-source': { fill: 'red', d: 'M 10 0 L 0 5 L 10 10 z' },
-                '.marker-target': { fill: 'yellow', d: 'M 10 0 L 0 5 L 10 10 z' } 
+                '.marker-target': { d: 'M 10 0 L 0 5 L 10 10 z' }
             })
             const link = linkObject.toJSON();
             const array = state.array.concat(link.id);

@@ -24,3 +24,36 @@ export function setOrigin(x, y) {
 export function addLink(source, target) {
     return { type: 'ADD_LINK', source, target };
 }
+
+export function compile() {
+    return (_, getState) => {
+        const state = getState();
+
+        function defineNodeClasses(agg, nodeClasses) {
+            const nodeClass = nodeClasses[0];
+            const definition = `
+            $nodeclass ${ nodeClass.name } : StateNode : doStart {
+
+            } 
+
+            `;
+            return defineNodeClasses(agg + definition, nodeClasses.slice(1)); 
+        }
+
+        var code = `
+        #include "Behaviors/StateNode.h"
+
+        $nodeclass Machine : StateNode {
+
+            ${ defineNodeClasses('', state.nodeClasses) }
+
+            $setupmachine{
+
+            }
+
+        }
+
+        REGISTER_BEHAVIOR(ConversationMachine);
+        `;
+    }
+}

@@ -140,7 +140,6 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-
     selectElement,
     deselectElement,
     dragElement,

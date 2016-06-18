@@ -21,6 +21,7 @@
   "homepage": "https://github.com/sashankg/Tekkotsu-Composer#readme",
   "description": "",
   "dependencies": {
+    "backbone-redux": "^0.2.0",
     "enclave": "^0.10.7",
     "jointjs": "^0.9.7",
     "react": "^15.1.0",
