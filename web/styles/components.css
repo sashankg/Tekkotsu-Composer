@@ -4,7 +4,6 @@ html, body, #root {
 .app {
     display: flex;
     flex-direction: row;
-    background-color: green;
     height: 100%;
 }
 
@@ -12,9 +11,67 @@ html, body, #root {
     flex-grow: 1;
     overflow: hidden;
     height: 100%;
+    background-color: yellow;
 }
 
 #v-2 {
     width: 100%;
     height: 100%;
+}
+
+.connection {
+    fill-opacity: 0;
+}
+
+.connection-wrap {
+    fill-opacity: 0;
+}
+
+.link-tools {
+    display: none;
+}
+
+.marker-arrowheads {
+    fill-opacity: 0;
+}
+
+.marker-arrowheads:hover {
+    fill-opacity: 1;
+}
+.marker-arrowhead-group-source {
+    display: none;
+}
+
+.nodeTypePane {
+    position: absolute;
+    background-color: white;
+    display: flex;
+    width: 20%;
+    box-shadow: 2px 0px 5px grey;
+    flex-direction: column;
+    height: 100%;
+}
+
+.nodeType {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.nodeTypeList {
+}
+
+.nodeTypeEditor {
+    background-color: white;
+    height: 100%;
+    position: absolute;
+    width: 75%;
+    left: -75%
+}
+
+.react-context-menu-wrapper {
+    width: 100%;
+}
+
+.react-context-menu {
+    background-color: white;
 }

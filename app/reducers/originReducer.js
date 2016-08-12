@@ -5,7 +5,10 @@ export default function originReducer(state, action) {
                 x: action.x,
                 y: action.y
             }
+        case 'LOAD_DATA': {
+            return action.data.origin;
+        }
         default: 
-            return state || { x: 0, y: 0 }
+            return state || { x: 100, y: 100 }
     }
 }

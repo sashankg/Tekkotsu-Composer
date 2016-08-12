@@ -3,17 +3,23 @@ import thunk from 'redux-thunk';
 
 import graph from './reducers/graphReducer';
 import paper from './reducers/paperReducer';
-import nodeClasses from './reducers/nodeClassReducer';
+import nodeTypes from './reducers/nodeTypeReducer';
 import origin from './reducers/originReducer';
 import selectedElement from './reducers/selectedElementReducer';
+import typeEditor from './reducers/typeEditorReducer';
+import transitionTypes from './reducers/transitionTypeReducer';
+import editingElement from './reducers/editingElementReducer';
 
 export default function configureStore() {
     const reducers = combineReducers({
         graph,
         paper,
-        nodeClasses,
+        nodeTypes,
         origin,
         selectedElement,
+        typeEditor,
+        transitionTypes,
+        editingElement,
     });
 
     const store = createStore(

@@ -10,15 +10,16 @@ export default function paperReducer(state, action) {
         case 'STOP_PANNING':
             return Object.assign({}, state, { panning: false, panPoint: null });
         case 'START_LINKING':
-            return Object.assign({}, state, { linking: true });
+            return Object.assign({}, state, { linking: true, link: action.link });
         case 'STOP_LINKING':
-            return Object.assign({}, state, { linking: false });
+            return Object.assign({}, state, { linking: false, link: null });
         default:
             return state || {
                 dragging: false,
                 panning: false,
                 panPoint: null,
                 linking: false,
+                link: null,
             }
     }
 } 
