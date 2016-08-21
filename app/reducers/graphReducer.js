@@ -44,7 +44,7 @@ export default function graphReducer(state, action) {
             } 
         }
         case 'LOAD_DATA': {
-            return action.data.graph
+            return action.data.graph || state;
         }
     default: 
         return state || { array: [], entities: {} }

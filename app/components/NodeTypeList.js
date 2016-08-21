@@ -5,6 +5,7 @@ import NodeType from './NodeType';
 import TransitionType from './TransitionType';
 
 import { saveFile, loadFile } from '../actions/fileActions';
+import { compile } from '../actions/compileActions';
 
 class NodeTypeList extends React.Component {
     render() {
@@ -19,7 +20,7 @@ class NodeTypeList extends React.Component {
                 </div>
                 <div className="nodeListHeader">
                     <h1>Node Types</h1>
-                    <button>Edit</button>
+                    <button onClick={ this.props.compile }>Compile</button>
                 </div>
                 <div className="nodeTypeList">
                     { nodeTypes }
@@ -46,6 +47,7 @@ function mapStateToProps(state) {
 const mapDispatchToProps = {
     saveFile,
     loadFile,
+    compile,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NodeTypeList);

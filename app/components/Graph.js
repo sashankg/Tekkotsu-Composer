@@ -130,7 +130,6 @@ class Graph extends React.Component {
 
     handlePanEnd() {
         if(this.props.panning) {
-            console.log('hello?');
             const origin = this.paper.options.origin;
             this.props.stopPanning(origin.x, origin.y);
         }

@@ -1,5 +1,6 @@
-export function editElement(id) {
-    return { type: 'START_EDITING', element: id };
+export function editElement(id, f) {
+    const firstTime = f ? true : false
+    return { type: 'START_EDITING', element: id, firstTime };
 }
 
 export function stopEditing() {

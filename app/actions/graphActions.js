@@ -19,7 +19,7 @@ export function addElement(typeId, position) {
             }),
         }).toJSON();
         dispatch({ type: 'ADD_ELEMENT', element: node });
-        dispatch(editElement(node.id));
+        dispatch(editElement(node.id, true));
     }
 }
 

@@ -6,7 +6,7 @@ import { editVariable } from '../actions/graphActions';
 
 class ElementEditor extends React.Component {
     componentDidMount() {
-        if(this.props.variables.length == 1) {
+        if(this.props.variables.length == 1 && this.props.firstTime) {
             this.props.stopEditing();
         }
     }
@@ -34,17 +34,18 @@ class ElementEditor extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const element = state.graph.entities[state.editingElement];
-    if(!element) {
+    if(!state.editingElement) {
         return {
             closed: true
         }
     }
     else {
+        const element = state.graph.entities[state.editingElement.id];
         return {
             element: element.id,
             variables: element.variables,
             refName: element.refName,
+            firstTime: state.editingElement.firstTime,
         }
     }
 }

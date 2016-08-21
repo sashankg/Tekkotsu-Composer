@@ -44,6 +44,9 @@ export default function nodeTypeReducer(state, action) {
                 }, {}) 
             }
         }
+        case 'LOAD_DATA': {
+            return action.data.nodeTypes || state;
+        }
         default: return state || { 
             array: [1, 2], 
             entities: { 
@@ -60,7 +63,7 @@ export default function nodeTypeReducer(state, action) {
                         }
                     ],
                     n: 1,
-                }, 
+                },
                 2: { 
                     name: "Turn", 
                     variables: [
