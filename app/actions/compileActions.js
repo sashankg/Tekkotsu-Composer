@@ -1,3 +1,4 @@
+import { saveAs } from 'file-saver';
 export function compile() {
     return (dispatch, getState) => {
         const state = getState();
@@ -32,17 +33,19 @@ export function compile() {
         const source = 
 `#include "Behaviors/StateNode.h"
 
-$nodeclass Main : StateNode {
+$nodeclass Demo1 : StateNode {
     $setupmachine {
-        ${ nodeDeclarations.join('\n\t\t') }
+        ${ nodeDeclarations.join('\n        ') }
 
-        ${ transitionDeclarations.join('\n\t\t') }
+        ${ transitionDeclarations.join('\n        ') }
     }
 }
 
-REGISTER_BEHAVIOR(Main);
+REGISTER_BEHAVIOR(Demo1);
 `
-        console.log(source);
+        const blob = new Blob([source], {type: "text/plain;charset=utf-8"});
+        saveAs(blob, 'Demo1.cc.fsm');
+
     }
 }
 
