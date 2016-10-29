@@ -21,3 +21,5 @@ One of the biggest challenges was getting Redux and Backbone (which is used by J
 In order to convert the state machine diagram into the corresponding C++ code, I used the ES6 template literals features. I just iterated over all the elements, pulling data from the application state about types and names, and appended the necessary code as a template literal with the corresponding data filled in. The result is a straightforward and clean solution. 
 
 ![Transpiler Demo](https://cdn.rawgit.com/sashankg/Tekkotsu-Composer/master/transpiler.png)
+
+[All code can be found here](https://github.com/sashankg/Tekkotsu-Composer)
